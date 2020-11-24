@@ -15,12 +15,19 @@ else:
 class LSUNClass(data.Dataset):
     def __init__(self, db_path, transform=None, target_transform=None):
         import lmdb
+
         self.db_path = db_path
-        self.env = lmdb.open(db_path, max_readers=1, readonly=True, lock=False,
-                             readahead=False, meminit=False)
+        self.env = lmdb.open(
+            db_path,
+            max_readers=1,
+            readonly=True,
+            lock=False,
+            readahead=False,
+            meminit=False,
+        )
         with self.env.begin(write=False) as txn:
-            self.length = txn.stat()['entries']
-        cache_file = '_cache_' + db_path.replace('/', '_')
+            self.length = txn.stat()["entries"]
+        cache_file = "_cache_" + db_path.replace("/", "_")
         if os.path.isfile(cache_file):
             self.keys = pickle.load(open(cache_file, "rb"))
         else:
@@ -39,7 +46,7 @@ class LSUNClass(data.Dataset):
         buf = six.BytesIO()
         buf.write(imgbuf)
         buf.seek(0)
-        img = Image.open(buf).convert('RGB')
+        img = Image.open(buf).convert("RGB")
 
         if self.transform is not None:
             img = self.transform(img)
@@ -53,7 +60,7 @@ class LSUNClass(data.Dataset):
         return self.length
 
     def __repr__(self):
-        return self.__class__.__name__ + ' (' + self.db_path + ')'
+        return self.__class__.__name__ + " (" + self.db_path + ")"
 
 
 class LSUN(data.Dataset):
@@ -70,26 +77,34 @@ class LSUN(data.Dataset):
             target and transforms it.
     """
 
-    def __init__(self, db_path, classes='train',
-                 transform=None, target_transform=None):
-        categories = ['bedroom', 'bridge', 'church_outdoor', 'classroom',
-                      'conference_room', 'dining_room', 'kitchen',
-                      'living_room', 'restaurant', 'tower']
-        dset_opts = ['train', 'val', 'test']
+    def __init__(self, db_path, classes="train", transform=None, target_transform=None):
+        categories = [
+            "bedroom",
+            "bridge",
+            "church_outdoor",
+            "classroom",
+            "conference_room",
+            "dining_room",
+            "kitchen",
+            "living_room",
+            "restaurant",
+            "tower",
+        ]
+        dset_opts = ["train", "val", "test"]
         self.db_path = db_path
         if type(classes) == str and classes in dset_opts:
-            if classes == 'test':
+            if classes == "test":
                 classes = [classes]
             else:
-                classes = [c + '_' + classes for c in categories]
+                classes = [c + "_" + classes for c in categories]
         self.classes = classes
 
         # for each class, create an LSUNClassDataset
         self.dbs = []
         for c in self.classes:
-            self.dbs.append(LSUNClass(
-                db_path=db_path + '/' + c + '_lmdb',
-                transform=transform))
+            self.dbs.append(
+                LSUNClass(db_path=db_path + "/" + c + "_lmdb", transform=transform)
+            )
 
         self.indices = []
         count = 0
@@ -129,4 +144,4 @@ class LSUN(data.Dataset):
         return self.length
 
     def __repr__(self):
-        return self.__class__.__name__ + ' (' + self.db_path + ')'
+        return self.__class__.__name__ + " (" + self.db_path + ")"
