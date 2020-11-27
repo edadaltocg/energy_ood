@@ -355,8 +355,8 @@ print("\n\nTexture Detection")
 get_and_print_results(ood_loader)
 
 # /////////////// SVHN /////////////// # cropped and no sampling of the test set
-ood_data = svhn.SVHN(
-    root="../data/SVHN/",
+ood_data = dset.SVHN(
+    root="../data/",
     split="test",
     download=True,
     transform=trn.Compose(
