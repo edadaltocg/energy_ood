@@ -395,7 +395,7 @@ get_and_print_results(ood_loader)
 
 # /////////////// LSUN-R ///////////////
 ood_data = dset.ImageFolder(
-    root="../data/LSUN_resized/",
+    root="../data/LSUN_resize/",
     transform=trn.Compose([trn.ToTensor(), trn.Normalize(mean, std)]),
 )
 ood_loader = torch.utils.data.DataLoader(
