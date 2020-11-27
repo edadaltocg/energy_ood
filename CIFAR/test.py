@@ -343,7 +343,7 @@ def get_and_print_results(ood_loader, num_to_avg=args.num_to_avg):
 
 # /////////////// Textures ///////////////
 ood_data = dset.ImageFolder(
-    root="../data/",
+    root="../data/dtd-r1.0.1/",
     transform=trn.Compose(
         [trn.Resize(32), trn.CenterCrop(32), trn.ToTensor(), trn.Normalize(mean, std)]
     ),
@@ -371,7 +371,7 @@ get_and_print_results(ood_loader)
 
 # /////////////// Places365 ///////////////
 ood_data = dset.ImageFolder(
-    root="../data/",
+    root="../data/test_256/",
     transform=trn.Compose(
         [trn.Resize(32), trn.CenterCrop(32), trn.ToTensor(), trn.Normalize(mean, std)]
     ),
@@ -384,7 +384,7 @@ get_and_print_results(ood_loader)
 
 # /////////////// LSUN-C ///////////////
 ood_data = dset.ImageFolder(
-    root="../data/",
+    root="../data/LSUN",
     transform=trn.Compose([trn.ToTensor(), trn.Normalize(mean, std)]),
 )
 ood_loader = torch.utils.data.DataLoader(
@@ -395,7 +395,7 @@ get_and_print_results(ood_loader)
 
 # /////////////// LSUN-R ///////////////
 ood_data = dset.ImageFolder(
-    root="../data/",
+    root="../data/LSUN_resized",
     transform=trn.Compose([trn.ToTensor(), trn.Normalize(mean, std)]),
 )
 ood_loader = torch.utils.data.DataLoader(
@@ -406,7 +406,7 @@ get_and_print_results(ood_loader)
 
 # /////////////// iSUN ///////////////
 ood_data = dset.ImageFolder(
-    root="../data/",
+    root="../data/iSUN",
     transform=trn.Compose([trn.ToTensor(), trn.Normalize(mean, std)]),
 )
 ood_loader = torch.utils.data.DataLoader(
