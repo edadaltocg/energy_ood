@@ -357,7 +357,7 @@ ood_data = svhn.SVHN(
     transform=trn.Compose(
         [trn.ToTensor(), trn.Normalize(mean, std)]  # trn.Resize(32),
     ),
-    download=False,
+    download=True,
 )
 ood_loader = torch.utils.data.DataLoader(
     ood_data, batch_size=args.test_bs, shuffle=True, num_workers=2, pin_memory=True
@@ -449,11 +449,13 @@ get_and_print_results(ood_loader)
 
 if "cifar10_" in args.method_name:
     ood_data = dset.CIFAR100(
-        "../data/vision-greg/cifarpy", train=False, transform=test_transform
+        "../data/vision-greg/cifarpy", train=False, transform=test_transform,
+        download=True
     )
 else:
     ood_data = dset.CIFAR10(
-        "../data/vision-greg/cifarpy", train=False, transform=test_transform
+        "../data/vision-greg/cifarpy", train=False, transform=test_transform,
+        download=True
     )
 
 
@@ -490,11 +492,13 @@ get_and_print_results(ood_loader)
 
 if "cifar10_" in args.method_name:
     ood_data = dset.CIFAR100(
-        "../data/vision-greg/cifarpy", train=False, transform=trn.ToTensor()
+        "../data/vision-greg/cifarpy", train=False, transform=trn.ToTensor(),
+        download=True
     )
 else:
     ood_data = dset.CIFAR10(
-        "../data/vision-greg/cifarpy", train=False, transform=trn.ToTensor()
+        "../data/vision-greg/cifarpy", train=False, transform=trn.ToTensor(),
+        download=True
     )
 
 
