@@ -134,16 +134,12 @@ train_transform = trn.Compose(
 test_transform = trn.Compose([trn.ToTensor(), trn.Normalize(mean, std)])
 
 if args.dataset == "cifar10":
-    train_data_in = dset.CIFAR10(
-        "../data/cifarpy", train=True, transform=train_transform
-    )
-    test_data = dset.CIFAR10("../data/cifarpy", train=False, transform=test_transform)
+    train_data_in = dset.CIFAR10("../data/", train=True, transform=train_transform)
+    test_data = dset.CIFAR10("../data/", train=False, transform=test_transform)
     num_classes = 10
 else:
-    train_data_in = dset.CIFAR100(
-        "../data/cifarpy", train=True, transform=train_transform
-    )
-    test_data = dset.CIFAR100("../data/cifarpy", train=False, transform=test_transform)
+    train_data_in = dset.CIFAR100("../data/", train=True, transform=train_transform)
+    test_data = dset.CIFAR100("../data/", train=False, transform=test_transform)
     num_classes = 100
 
 
