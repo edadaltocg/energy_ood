@@ -370,17 +370,17 @@ print("\n\nSVHN Detection")
 get_and_print_results(ood_loader)
 
 # /////////////// Places365 ///////////////
-ood_data = dset.ImageFolder(
-    root="../data/test_256/",
-    transform=trn.Compose(
-        [trn.Resize(32), trn.CenterCrop(32), trn.ToTensor(), trn.Normalize(mean, std)]
-    ),
-)
-ood_loader = torch.utils.data.DataLoader(
-    ood_data, batch_size=args.test_bs, shuffle=True, num_workers=2, pin_memory=True
-)
-print("\n\nPlaces365 Detection")
-get_and_print_results(ood_loader)
+# ood_data = dset.ImageFolder(
+#     root="../data/test_256/",
+#     transform=trn.Compose(
+#         [trn.Resize(32), trn.CenterCrop(32), trn.ToTensor(), trn.Normalize(mean, std)]
+#     ),
+# )
+# ood_loader = torch.utils.data.DataLoader(
+#     ood_data, batch_size=args.test_bs, shuffle=True, num_workers=2, pin_memory=True
+# )
+# print("\n\nPlaces365 Detection")
+# get_and_print_results(ood_loader)
 
 # /////////////// LSUN-C ///////////////
 ood_data = dset.ImageFolder(
