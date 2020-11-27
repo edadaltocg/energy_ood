@@ -343,7 +343,7 @@ def get_and_print_results(ood_loader, num_to_avg=args.num_to_avg):
 
 # /////////////// Textures ///////////////
 ood_data = dset.ImageFolder(
-    root="../data/dtd-r1.0.1/",
+    root="../data/dtd/",
     transform=trn.Compose(
         [trn.Resize(32), trn.CenterCrop(32), trn.ToTensor(), trn.Normalize(mean, std)]
     ),
