@@ -356,7 +356,7 @@ get_and_print_results(ood_loader)
 
 # /////////////// SVHN /////////////// # cropped and no sampling of the test set
 ood_data = svhn.SVHN(
-    root="../data/",
+    root="../data/SVHN/",
     split="test",
     download=True,
     transform=trn.Compose(
@@ -384,7 +384,7 @@ get_and_print_results(ood_loader)
 
 # /////////////// LSUN-C ///////////////
 ood_data = dset.ImageFolder(
-    root="../data/LSUN",
+    root="../data/LSUN/",
     transform=trn.Compose([trn.ToTensor(), trn.Normalize(mean, std)]),
 )
 ood_loader = torch.utils.data.DataLoader(
@@ -395,7 +395,7 @@ get_and_print_results(ood_loader)
 
 # /////////////// LSUN-R ///////////////
 ood_data = dset.ImageFolder(
-    root="../data/LSUN_resized",
+    root="../data/LSUN_resized/",
     transform=trn.Compose([trn.ToTensor(), trn.Normalize(mean, std)]),
 )
 ood_loader = torch.utils.data.DataLoader(
@@ -406,7 +406,7 @@ get_and_print_results(ood_loader)
 
 # /////////////// iSUN ///////////////
 ood_data = dset.ImageFolder(
-    root="../data/iSUN",
+    root="../data/iSUN/",
     transform=trn.Compose([trn.ToTensor(), trn.Normalize(mean, std)]),
 )
 ood_loader = torch.utils.data.DataLoader(
