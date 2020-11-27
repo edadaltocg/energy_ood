@@ -358,10 +358,10 @@ get_and_print_results(ood_loader)
 ood_data = svhn.SVHN(
     root="../data/",
     split="test",
+    download=True,
     transform=trn.Compose(
         [trn.ToTensor(), trn.Normalize(mean, std)]  # trn.Resize(32),
     ),
-    download=True,
 )
 ood_loader = torch.utils.data.DataLoader(
     ood_data, batch_size=args.test_bs, shuffle=True, num_workers=2, pin_memory=True
