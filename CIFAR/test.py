@@ -91,10 +91,14 @@ std = [x / 255 for x in [63.0, 62.1, 66.7]]
 test_transform = trn.Compose([trn.ToTensor(), trn.Normalize(mean, std)])
 
 if "cifar10_" in args.method_name:
-    test_data = dset.CIFAR10("../data/cifarpy", train=False, transform=test_transform)
+    test_data = dset.CIFAR10(
+        "../data/", train=False, transform=test_transform, download=True
+    )
     num_classes = 10
 else:
-    test_data = dset.CIFAR100("../data/cifarpy", train=False, transform=test_transform)
+    test_data = dset.CIFAR100(
+        "../data/", train=False, transform=test_transform, download=True
+    )
     num_classes = 100
 
 
@@ -229,11 +233,11 @@ elif args.score == "M":
 
     if "cifar10_" in args.method_name:
         train_data = dset.CIFAR10(
-            "../data/cifarpy", train=True, transform=test_transform
+            "../data/", train=True, transform=test_transform, download=True
         )
     else:
         train_data = dset.CIFAR100(
-            "../data/cifarpy", train=True, transform=test_transform
+            "../data/", train=True, transform=test_transform, download=True
         )
 
     train_loader = torch.utils.data.DataLoader(
@@ -339,7 +343,7 @@ def get_and_print_results(ood_loader, num_to_avg=args.num_to_avg):
 
 # /////////////// Textures ///////////////
 ood_data = dset.ImageFolder(
-    root="../data/dtd/images",
+    root="../data/",
     transform=trn.Compose(
         [trn.Resize(32), trn.CenterCrop(32), trn.ToTensor(), trn.Normalize(mean, std)]
     ),
@@ -352,7 +356,7 @@ get_and_print_results(ood_loader)
 
 # /////////////// SVHN /////////////// # cropped and no sampling of the test set
 ood_data = svhn.SVHN(
-    root="../data/svhn/",
+    root="../data/",
     split="test",
     transform=trn.Compose(
         [trn.ToTensor(), trn.Normalize(mean, std)]  # trn.Resize(32),
@@ -367,7 +371,7 @@ get_and_print_results(ood_loader)
 
 # /////////////// Places365 ///////////////
 ood_data = dset.ImageFolder(
-    root="../data/places365/",
+    root="../data/",
     transform=trn.Compose(
         [trn.Resize(32), trn.CenterCrop(32), trn.ToTensor(), trn.Normalize(mean, std)]
     ),
@@ -380,7 +384,7 @@ get_and_print_results(ood_loader)
 
 # /////////////// LSUN-C ///////////////
 ood_data = dset.ImageFolder(
-    root="../data/LSUN_C",
+    root="../data/",
     transform=trn.Compose([trn.ToTensor(), trn.Normalize(mean, std)]),
 )
 ood_loader = torch.utils.data.DataLoader(
@@ -391,7 +395,7 @@ get_and_print_results(ood_loader)
 
 # /////////////// LSUN-R ///////////////
 ood_data = dset.ImageFolder(
-    root="../data/LSUN_resize",
+    root="../data/",
     transform=trn.Compose([trn.ToTensor(), trn.Normalize(mean, std)]),
 )
 ood_loader = torch.utils.data.DataLoader(
@@ -402,7 +406,7 @@ get_and_print_results(ood_loader)
 
 # /////////////// iSUN ///////////////
 ood_data = dset.ImageFolder(
-    root="../data/iSUN",
+    root="../data/",
     transform=trn.Compose([trn.ToTensor(), trn.Normalize(mean, std)]),
 )
 ood_loader = torch.utils.data.DataLoader(
@@ -449,13 +453,11 @@ get_and_print_results(ood_loader)
 
 if "cifar10_" in args.method_name:
     ood_data = dset.CIFAR100(
-        "../data/vision-greg/cifarpy", train=False, transform=test_transform,
-        download=True
+        "../data/", train=False, transform=test_transform, download=True
     )
 else:
     ood_data = dset.CIFAR10(
-        "../data/vision-greg/cifarpy", train=False, transform=test_transform,
-        download=True
+        "../data/", train=False, transform=test_transform, download=True
     )
 
 
@@ -492,13 +494,11 @@ get_and_print_results(ood_loader)
 
 if "cifar10_" in args.method_name:
     ood_data = dset.CIFAR100(
-        "../data/vision-greg/cifarpy", train=False, transform=trn.ToTensor(),
-        download=True
+        "../data/", train=False, transform=trn.ToTensor(), download=True
     )
 else:
     ood_data = dset.CIFAR10(
-        "../data/vision-greg/cifarpy", train=False, transform=trn.ToTensor(),
-        download=True
+        "../data/", train=False, transform=trn.ToTensor(), download=True
     )
 
 
